@@ -131,3 +131,7 @@ export function getDefaultCoffee(profile: BrewProfile): number {
 export function getDefaultWater(profile: BrewProfile): number {
   return calculateWater(profile.brew.defaultCoffee, getRecommendedRatio(profile));
 }
+
+export function getDefaultRatio(profile: BrewProfile): number {
+  return profile.ratios.find((ratio) => ratio.isRecommended)?.ratio ?? profile.ratios[0].ratio;
+}

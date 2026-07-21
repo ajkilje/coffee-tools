@@ -1,13 +1,28 @@
 import { useMemo, useState } from "react";
 
 import { brewProfiles } from "../../data/brewProfiles";
-import { calculateWater, getRatioProfile } from "../../utils/ratio";
+import {
+  calculateWater,
+  getDefaultRatio,
+  getNextRatio,
+  getPreviousRatio,
+  getRatioProfile,
+} from "../../utils/ratio";
 
-import { getNextRatio, getPreviousRatio } from "../../utils/ratio";
-
-import { formatDurationRange } from "../../utils/time";
+import {
+  BrewInfo,
+  BrewMethodSelector,
+  CharacteristicList,
+  CoffeeInput,
+  RatioSelector,
+  WaterResult,
+} from "../../components/ratio-calculator";
 
 export default function RatioCalculator() {
+  // ==========================
+  // State
+  // ==========================
+
   // Default to V60
   const [selectedMethod, setSelectedMethod] = useState("v60");
 
@@ -16,6 +31,10 @@ export default function RatioCalculator() {
 
   // Default ratio
   const [ratio, setRatio] = useState(16);
+
+  // ==========================
+  // Derived Data
+  // ==========================
 
   // Selected brew profile
   const profile = useMemo(() => {
@@ -32,115 +51,72 @@ export default function RatioCalculator() {
     return calculateWater(coffee, ratio);
   }, [coffee, ratio]);
 
+  // ==========================
+  // Event Handlers
+  // ==========================
+
+  const handleDecreaseCoffee = () => {
+    setCoffee((current) => Math.max(profile.brew.coffeeDose.min, current - 1));
+  };
+
+  const handleIncreaseCoffee = () => {
+    setCoffee((current) => Math.min(profile.brew.coffeeDose.max, current + 1));
+  };
+
+  const handleDecreaseRatio = () => {
+    setRatio(getPreviousRatio(profile, ratio));
+  };
+
+  const handleIncreaseRatio = () => {
+    setRatio(getNextRatio(profile, ratio));
+  };
+
+  const handleMethodChange = (methodId: string) => {
+    const method = brewProfiles.find((profile) => profile.id === methodId);
+
+    if (!method) return;
+
+    setSelectedMethod(method.id);
+    setCoffee(method.brew.defaultCoffee);
+    setRatio(getDefaultRatio(method));
+  };
+
+  // ==========================
+  // Render
+  // ==========================
+
   return (
     <div>
       <h1>Brew Ratio Calculator</h1>
 
       <hr />
 
-      <div>
-        <label htmlFor="brew-method">
-          <strong>Brew Method</strong>
-        </label>
+      <BrewMethodSelector
+        methods={brewProfiles}
+        selectedMethod={selectedMethod}
+        onChange={handleMethodChange}
+      />
 
-        <br />
+      <CoffeeInput
+        value={coffee}
+        min={profile.brew.coffeeDose.min}
+        max={profile.brew.coffeeDose.max}
+        onDecrease={handleDecreaseCoffee}
+        onIncrease={handleIncreaseCoffee}
+      />
 
-        <select
-          id="brew-method"
-          value={selectedMethod}
-          onChange={(event) => {
-            const method = brewProfiles.find((item) => item.id === event.target.value);
+      <RatioSelector
+        value={ratio}
+        supportedRatios={profile.ratios.map((r) => r.ratio)}
+        onDecrease={handleDecreaseRatio}
+        onIncrease={handleIncreaseRatio}
+      />
 
-            if (!method) return;
-
-            setSelectedMethod(method.id);
-            setCoffee(method.brew.defaultCoffee);
-            setRatio(method.ratios.find((r) => r.isRecommended)?.ratio ?? method.ratios[0].ratio);
-          }}
-        >
-          {brewProfiles.map((method) => (
-            <option key={method.id} value={method.id}>
-              {method.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <strong>Coffee</strong>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            marginTop: "8px",
-          }}
-        >
-          <button
-            onClick={() =>
-              setCoffee((current) => Math.max(profile.brew.coffeeDose.min, current - 1))
-            }
-          >
-            -
-          </button>
-
-          <span>{coffee} g</span>
-
-          <button
-            onClick={() =>
-              setCoffee((current) => Math.min(profile.brew.coffeeDose.max, current + 1))
-            }
-          >
-            +
-          </button>
-        </div>
-
-        <small>
-          Allowed: {profile.brew.coffeeDose.min}–{profile.brew.coffeeDose.max} g
-        </small>
-      </div>
-
-      <div>
-        <strong>Ratio</strong>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            marginTop: "8px",
-          }}
-        >
-          <button onClick={() => setRatio(getPreviousRatio(profile, ratio))}>-</button>
-
-          <span>1 : {ratio}</span>
-
-          <button onClick={() => setRatio(getNextRatio(profile, ratio))}>+</button>
-        </div>
-
-        <small>Supported ratios: {profile.ratios.map((r) => `1:${r.ratio}`).join(", ")}</small>
-      </div>
-
-      <p>
-        <strong>Water:</strong> {water} g
-      </p>
+      <WaterResult water={water} />
 
       <hr />
 
-      <p>
-        <strong>Grind:</strong> {profile.brew.grind}
-      </p>
-
-      <p>
-        <strong>Temperature:</strong> {profile.brew.temperature.min}–{profile.brew.temperature.max}
-        °C
-      </p>
-
-      <p>
-        <strong>Brew Time:</strong>{" "}
-        {formatDurationRange(profile.brew.brewTime.min, profile.brew.brewTime.max)}
-      </p>
+      <BrewInfo brew={profile.brew} />
 
       <hr />
 
@@ -148,13 +124,7 @@ export default function RatioCalculator() {
 
       <p>{ratioProfile?.description}</p>
 
-      <ul>
-        {ratioProfile?.characteristics.map((item) => (
-          <li key={item.label}>
-            <strong>{item.label}:</strong> {item.value}
-          </li>
-        ))}
-      </ul>
+      {ratioProfile && <CharacteristicList characteristics={ratioProfile.characteristics} />}
     </div>
   );
 }
