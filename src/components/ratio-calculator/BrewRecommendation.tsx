@@ -8,12 +8,14 @@ interface BrewRecommendationProps {
 
 export default function BrewRecommendation({ ratioProfile }: BrewRecommendationProps) {
   return (
-    <>
-      <h3>{ratioProfile.title}</h3>
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-xl font-bold text-[#3B161D]">{ratioProfile.title}</h3>
 
-      <p>{ratioProfile.description}</p>
+        <p className="mt-2 leading-7 text-stone-600">{ratioProfile.description}</p>
+      </div>
 
       <CharacteristicList characteristics={ratioProfile.characteristics} />
-    </>
+    </div>
   );
 }

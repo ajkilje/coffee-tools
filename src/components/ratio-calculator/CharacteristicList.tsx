@@ -6,16 +6,14 @@ interface CharacteristicListProps {
 
 export default function CharacteristicList({ characteristics }: CharacteristicListProps) {
   return (
-    <div>
-      <strong>Characteristics</strong>
+    <div className="divide-y divide-stone-100 rounded-lg border border-stone-200 bg-stone-50">
+      {characteristics.map((characteristic) => (
+        <div key={characteristic.label} className="flex items-center justify-between px-4 py-3">
+          <span className="text-stone-500">{characteristic.label}</span>
 
-      <ul>
-        {characteristics.map((item) => (
-          <li key={item.label}>
-            <strong>{item.label}:</strong> {item.value}
-          </li>
-        ))}
-      </ul>
+          <span className="font-medium text-[#3B161D]">{characteristic.value}</span>
+        </div>
+      ))}
     </div>
   );
 }

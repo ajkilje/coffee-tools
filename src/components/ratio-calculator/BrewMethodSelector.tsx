@@ -12,24 +12,34 @@ export default function BrewMethodSelector({
   onChange,
 }: BrewMethodSelectorProps) {
   return (
-    <div>
-      <label htmlFor="brew-method">
-        <strong>Brew Method</strong>
-      </label>
+    <div className="space-y-3">
+      <h3 className="text-lg font-semibold text-[#3B161D]">Brew Method</h3>
 
-      <br />
+      <div className="flex flex-wrap gap-3">
+        {methods.map((method) => {
+          const selected = method.id === selectedMethod;
 
-      <select
-        id="brew-method"
-        value={selectedMethod}
-        onChange={(event) => onChange(event.target.value)}
-      >
-        {methods.map((method) => (
-          <option key={method.id} value={method.id}>
-            {method.name}
-          </option>
-        ))}
-      </select>
+          return (
+            <button
+              key={method.id}
+              type="button"
+              onClick={() => onChange(method.id)}
+              className={[
+                "rounded-full border px-5 py-2.5",
+                "text-sm font-medium whitespace-nowrap",
+                "transition-all duration-200 ease-out",
+                "active:scale-95",
+                "focus:outline-none focus:ring-2 focus:ring-[#3B161D]/20",
+                selected
+                  ? "border-[#3B161D] bg-[#3B161D] text-white shadow-sm"
+                  : "border-stone-300 bg-white text-[#3B161D] hover:border-[#3B161D] hover:bg-[#F8F4ED]",
+              ].join(" ")}
+            >
+              {method.name}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

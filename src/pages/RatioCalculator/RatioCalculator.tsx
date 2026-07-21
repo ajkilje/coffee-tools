@@ -9,6 +9,8 @@ import {
 
 import { useRatioCalculator } from "../../hooks";
 
+import { Card, PageContainer } from "../../components/ui";
+
 export default function RatioCalculator() {
   const {
     methods,
@@ -26,41 +28,45 @@ export default function RatioCalculator() {
   } = useRatioCalculator();
 
   return (
-    <div>
-      <h1>Brew Ratio Calculator</h1>
+    <PageContainer>
+      <Card title="Brew Ratio Calculator">
+        <BrewMethodSelector
+          methods={methods}
+          selectedMethod={selectedMethod}
+          onChange={handleMethodChange}
+        />
 
-      <hr />
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="space-y-6">
+            <CoffeeInput
+              value={coffee}
+              min={profile.brew.coffeeDose.min}
+              max={profile.brew.coffeeDose.max}
+              onDecrease={handleDecreaseCoffee}
+              onIncrease={handleIncreaseCoffee}
+            />
 
-      <BrewMethodSelector
-        methods={methods}
-        selectedMethod={selectedMethod}
-        onChange={handleMethodChange}
-      />
+            <RatioSelector
+              value={ratio}
+              supportedRatios={profile.ratios.map((ratio) => ratio.ratio)}
+              onDecrease={handleDecreaseRatio}
+              onIncrease={handleIncreaseRatio}
+            />
+          </div>
 
-      <CoffeeInput
-        value={coffee}
-        min={profile.brew.coffeeDose.min}
-        max={profile.brew.coffeeDose.max}
-        onDecrease={handleDecreaseCoffee}
-        onIncrease={handleIncreaseCoffee}
-      />
+          <WaterResult water={water} coffee={coffee} ratio={ratio} />
+        </div>
+      </Card>
 
-      <RatioSelector
-        value={ratio}
-        supportedRatios={profile.ratios.map((ratio) => ratio.ratio)}
-        onDecrease={handleDecreaseRatio}
-        onIncrease={handleIncreaseRatio}
-      />
+      <Card title="Brew Information">
+        <BrewInfo brew={profile.brew} />
+      </Card>
 
-      <WaterResult water={water} />
-
-      <hr />
-
-      <BrewInfo brew={profile.brew} />
-
-      <hr />
-
-      {ratioProfile && <BrewRecommendation ratioProfile={ratioProfile} />}
-    </div>
+      {ratioProfile && (
+        <Card>
+          <BrewRecommendation ratioProfile={ratioProfile} />
+        </Card>
+      )}
+    </PageContainer>
   );
 }

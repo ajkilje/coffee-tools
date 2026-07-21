@@ -1,4 +1,5 @@
 import type { BrewDetails } from "../../types/brew";
+
 import { formatDurationRange } from "../../utils/time";
 
 interface BrewInfoProps {
@@ -7,20 +8,30 @@ interface BrewInfoProps {
 
 export default function BrewInfo({ brew }: BrewInfoProps) {
   return (
-    <div>
-      <strong>Brew Information</strong>
+    <div className="space-y-4">
+      <InfoRow label="Grind" value={brew.grind} />
 
-      <p>
-        <strong>Grind:</strong> {brew.grind}
-      </p>
+      <InfoRow label="Temperature" value={`${brew.temperature.min}–${brew.temperature.max}°C`} />
 
-      <p>
-        <strong>Temperature:</strong> {brew.temperature.min}–{brew.temperature.max}°C
-      </p>
+      <InfoRow
+        label="Brew Time"
+        value={formatDurationRange(brew.brewTime.min, brew.brewTime.max)}
+      />
+    </div>
+  );
+}
 
-      <p>
-        <strong>Brew Time:</strong> {formatDurationRange(brew.brewTime.min, brew.brewTime.max)}
-      </p>
+interface InfoRowProps {
+  label: string;
+  value: string;
+}
+
+function InfoRow({ label, value }: InfoRowProps) {
+  return (
+    <div className="flex items-center justify-between border-b border-stone-100 pb-3 last:border-none last:pb-0">
+      <span className="text-stone-500">{label}</span>
+
+      <span className="font-medium text-[#3B161D]">{value}</span>
     </div>
   );
 }
