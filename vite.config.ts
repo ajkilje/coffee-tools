@@ -16,9 +16,10 @@ export default defineConfig({
 
       manifest: {
         id: "/",
-        name: "Coffee Tools",
-        short_name: "Coffee Tools",
-        description: "Professional coffee brewing calculators by Flour & Feine",
+        name: "Flour & Feine Coffee Tools",
+        short_name: "Flour & Feine",
+
+        description: "Coffee brewing tools by Flour & Feine",
 
         theme_color: "#3B161D",
         background_color: "#F1EBE1",

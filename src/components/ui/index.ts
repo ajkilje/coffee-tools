@@ -1,3 +1,4 @@
 export { default as Card } from "./Card";
+export { default as ComingSoonCard } from "./ComingSoonCard";
 export { default as IconButton } from "./IconButton";
 export { default as PageContainer } from "./PageContainer";

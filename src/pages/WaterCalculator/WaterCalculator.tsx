@@ -1,9 +1,14 @@
-function WaterCalculator() {
+import { ComingSoonCard, PageContainer } from "../../components/ui";
+
+export default function WaterCalculator() {
   return (
-    <h1 className="text-4xl p-10">
-      Water Calculator
-    </h1>
+    <PageContainer>
+      <ComingSoonCard
+        emoji="💧"
+        title="Water Calculator"
+        tagline="Minerals matter."
+        description="We're still figuring out the chemistry so you don't have to."
+      />
+    </PageContainer>
   );
 }
-
-export default WaterCalculator;
