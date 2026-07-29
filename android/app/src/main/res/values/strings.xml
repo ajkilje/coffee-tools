@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Coffee Tools</string>
-    <string name="title_activity_main">Coffee Tools</string>
+    <string name="app_name">Flour &amp; Feine</string>
+    <string name="title_activity_main">Flour &amp; Feine</string>
     <string name="package_name">com.flourfeine.coffeetools</string>
     <string name="custom_url_scheme">com.flourfeine.coffeetools</string>
 </resources>
