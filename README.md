@@ -1,155 +1,276 @@
-# ☕ Coffee Tools
+<p align="center">
+  <img src="docs/images/icon.png" width="120" alt="Coffee Tools Logo">
+</p>
 
-Modern coffee brewing tools built for coffee enthusiasts.
+<h1 align="center">Coffee Tools</h1>
 
-Coffee Tools is a collection of fast, simple and thoughtfully designed utilities to help you brew better coffee. From brew ratios to timers and water recipes, everything lives in one clean, responsive application.
+<p align="center">
+  <strong>Brew better coffee. Less guesswork.</strong>
+</p>
 
-Built with React, TypeScript and Tailwind CSS, the project focuses on clean architecture, reusable components and a great user experience.
+<p align="center">
+  An open-source collection of coffee brewing tools by <strong>Flour & Feine</strong>.
+</p>
+
+<p align="center">
+
+![Platform](https://img.shields.io/badge/Platform-Web%20%7C%20Android-success)
+![React](https://img.shields.io/badge/React-19-61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6)
+![PWA](https://img.shields.io/badge/PWA-Installable-6E4B3A)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
+</p>
 
 ---
 
-## Features
+## Demo
 
-### Available
+<p align="center">
+  <img src="docs/images/demo.gif" width="320" alt="Coffee Tools Demo">
+</p>
+
+Coffee Tools is a collection of beautifully simple coffee calculators and brewing utilities designed for home brewers, enthusiasts and professionals.
+
+Whether you're dialing in a V60, experimenting with an AeroPress recipe or simply trying to calculate the correct water amount, Coffee Tools keeps the math out of your brewing.
+
+---
+
+# Features
+
+## Available
 
 - ☕ Brew Ratio Calculator
-  - Multiple brew methods
-  - Adjustable coffee dose
-  - Adjustable brew ratio
-  - Instant water calculation
-  - Brew recommendations
-  - Brew information (grind, temperature, brew time)
-  - Responsive interface
-
-### Planned
-
-- ⏱ Brew Timer
-- 📋 Brew Recipes
-- 🧭 Coffee Compass (Troubleshooting Guide)
-- 💧 Water Recipe Calculator
-- ⚖ Dose Calculator
-- 🔄 Unit Converter
-- 📚 Coffee Knowledge
+- 💧 Automatic water calculation
+- 📖 Brewing recommendations
+- 🌡️ Grind size guidance
+- 🌡️ Temperature recommendations
+- ⏱️ Brew time recommendations
 - 📱 Progressive Web App (PWA)
+- 🤖 Native Android application
+- ⚡ Fast, lightweight and offline capable
+
+## Coming Soon
+
+- ⏱️ Brew Timer
+- 💧 Water Calculator
+- 📊 TDS Calculator
+- 🎯 Coffee Compass
+- 📈 Extraction Yield Calculator
+- 📚 Brew Recipe Library
+- ❤️ Favourite Recipes
 
 ---
 
-## Tech Stack
+# Supported Brew Methods
+
+- V60
+- Pour Over
+- French Press
+- AeroPress
+- AeroPress (Inverted)
+- Moka Pot
+- Cold Brew
+
+More brewing methods will be added in future releases.
+
+---
+
+# Screenshots
+
+## Home
+
+<p align="center">
+  <img src="docs/images/home.jpeg" width="280" alt="Home Screen">
+</p>
+
+## Brew Ratio Calculator
+
+<p align="center">
+  <img src="docs/images/brew-ratio.jpeg" width="250" alt="Brew Ratio Calculator">
+  <img src="docs/images/water-result.jpeg" width="250" alt="Water Result">
+  <img src="docs/images/brew-information.jpeg" width="250" alt="Brew Information">
+</p>
+
+## Upcoming Tools
+
+<p align="center">
+  <img src="docs/images/brew-timer.jpeg" width="250" alt="Brew Timer">
+  <img src="docs/images/water-calculator.jpeg" width="250" alt="Water Calculator">
+</p>
+
+---
+
+# Live Demo
+
+### Progressive Web App
+
+https://tools.flourfeine.com
+
+### Android
+
+Available from the GitHub Releases page.
+
+Google Play release coming soon.
+
+---
+
+# Why Coffee Tools?
+
+Coffee brewing shouldn't require spreadsheets.
+
+Coffee Tools helps you calculate brew ratios, water quantities and recommended brewing parameters in seconds so you can focus on making great coffee instead of doing mental math.
+
+---
+
+# Technology
+
+Built with
 
 - React 19
-- TypeScript 5
+- TypeScript
 - Vite
-- Tailwind CSS 4
-- React Router 7
-- Lucide React
-- Oxlint
-- Prettier
-- GitHub Actions
+- Capacitor
+- Tailwind CSS
+
+Available as
+
+- 🌐 Progressive Web App
+- 🤖 Native Android App
 
 ---
 
-## Getting Started
+# Running Locally
 
-Clone the repository
+Clone the repository.
 
 ```bash
 git clone https://github.com/ajkilje/coffee-tools.git
-```
-
-Navigate into the project
-
-```bash
 cd coffee-tools
 ```
 
-Install dependencies
+Install dependencies.
 
 ```bash
 npm install
 ```
 
-Start the development server
+Run the development server.
 
 ```bash
 npm run dev
 ```
 
-Run linting
+---
 
-```bash
-npm run lint
-```
+# Building
 
-Create a production build
+## Web
 
 ```bash
 npm run build
 ```
 
----
+## Android APK
 
-## Project Structure
+```bash
+npm run build
+npx cap sync android
 
-```text
-src/
-├── assets/
-├── components/
-│   ├── ratio-calculator/
-│   └── ui/
-├── data/
-├── hooks/
-├── layouts/
-├── pages/
-├── routes/
-├── types/
-└── utils/
+cd android
+.\gradlew assembleRelease
 ```
 
-The project follows a feature-driven architecture with reusable UI components, custom hooks, shared utilities and centralized routing.
+APK output
+
+```
+android/app/build/outputs/apk/release/app-release.apk
+```
+
+## Google Play Bundle (AAB)
+
+```bash
+.\gradlew bundleRelease
+```
+
+AAB output
+
+```
+android/app/build/outputs/bundle/release/app-release.aab
+```
 
 ---
 
-## Roadmap
+# Project Structure
 
-### Phase 1 — Foundation ✅
-
-- [x] React + Vite setup
-- [x] Routing
-- [x] Reusable UI components
-- [x] Responsive layout
-- [x] GitHub Actions
-- [x] Prettier
-- [x] Oxlint
-
-### Phase 2 — Coffee Tools
-
-- [x] Brew Ratio Calculator
-- [ ] Brew Timer
-- [ ] Brew Recipes
-- [ ] Coffee Compass
-- [ ] Dose Calculator
-- [ ] Water Recipe Calculator
-- [ ] Unit Converter
-
-### Phase 3 — Platform
-
-- [ ] Coffee Knowledge
-- [ ] Firebase Deployment
-- [ ] Progressive Web App
-- [ ] Dark Mode
+```
+coffee-tools/
+├── android/
+├── assets/
+├── docs/
+│   └── images/
+│       ├── demo.gif
+│       ├── home.jpeg
+│       ├── brew-ratio.jpeg
+│       ├── water-result.jpeg
+│       ├── brew-information.jpeg
+│       ├── brew-timer.jpeg
+│       ├── water-calculator.jpeg
+│       └── icon.png
+├── public/
+├── src/
+├── package.json
+└── README.md
+```
 
 ---
 
-## Philosophy
+# Roadmap
 
-Coffee Tools is designed around three principles:
+## Version 1.1
 
-- **Simple** — Fast, uncluttered tools with no unnecessary distractions.
-- **Useful** — Every feature should solve a real brewing problem.
-- **Modern** — Clean architecture, reusable components and an intuitive user experience.
+- Brew Timer
+- Water Calculator
+- TDS Calculator
+
+## Future
+
+- Coffee Compass
+- Extraction Yield Calculator
+- Saved Recipes
+- Brew Profiles
+- Bean Database
+- Cloud Sync
+- iOS App
 
 ---
 
-## License
+# Contributing
 
-MIT
+Contributions are always welcome.
+
+If you'd like to improve Coffee Tools, please open an Issue or submit a Pull Request.
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
+See the **LICENSE** file for details.
+
+---
+
+# About Flour & Feine
+
+Flour & Feine is an independent specialty coffee roastery based in Thane, India.
+
+Coffee Tools is one of the open-source projects we build for the coffee community.
+
+🌐 https://flourfeine.com
+
+---
+
+<p align="center">
+Made with ☕ by <strong>Flour & Feine</strong>
+</p>
