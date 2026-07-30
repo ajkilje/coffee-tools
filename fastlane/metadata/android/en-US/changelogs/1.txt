@@ -1,0 +1,6 @@
+Initial public release.
+
+• Brew Ratio Calculator
+• Android app
+• Progressive Web App
+• Offline support

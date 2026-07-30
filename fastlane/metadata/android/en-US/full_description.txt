@@ -1,0 +1,22 @@
+Flour & Feine is an open-source collection of coffee brewing tools for coffee enthusiasts, home brewers, and professionals.
+
+Features include:
+
+• Brew Ratio Calculator
+• Water calculation
+• Brewing recommendations
+• Offline support
+• Progressive Web App
+• Native Android app
+
+Supported brewing methods:
+
+• V60
+• Pour Over
+• French Press
+• AeroPress
+• AeroPress (Inverted)
+• Moka Pot
+• Cold Brew
+
+Coffee Tools is the first collection of utilities available within the Flour & Feine app.
